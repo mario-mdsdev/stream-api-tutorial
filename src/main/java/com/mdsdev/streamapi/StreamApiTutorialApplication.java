@@ -3,8 +3,11 @@ package com.mdsdev.streamapi;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @SpringBootApplication
 public class StreamApiTutorialApplication {
@@ -78,6 +81,47 @@ public class StreamApiTutorialApplication {
                         .findFirst()
                         .orElse(null);
         System.out.println(firstEmployee);
+
+        // --> Flat Map
+        final String projects = employees.stream()
+                .map(employee -> employee.getProjects())
+                .flatMap(strings -> strings.stream())
+                .collect(Collectors.joining(","));
+        System.out.println(projects);
+
+
+        // --> Short circuit operations
+        //     Skip first record
+        //     Bring only one
+        final List<Employee> shortCircuit = employees.stream()
+                .skip(1)
+                .limit(1)
+                .collect(Collectors.toList());
+        System.out.println(shortCircuit);
+
+        // --> Finite Data
+        Stream.generate(Math::random)
+                .limit(5)
+                .forEach(value -> System.out.println(value));
+
+        // --> Sorting
+        final List<Employee> sortedByFirstName = employees.stream()
+                .sorted(((o1, o2) -> o1.getFirstName().compareToIgnoreCase(o2.getFirstName())))
+                .collect(Collectors.toList());
+        System.out.println(sortedByFirstName);
+
+        // --> Minimum or Maximum number of data
+        final Employee whoHasMaxSalary = employees.stream()
+                .max(Comparator.comparing(Employee::getSalary))
+                .orElseThrow(NoSuchElementException::new);
+        System.out.println(whoHasMaxSalary);
+
+        // --> Reduce
+        //     Accumulate values to perform some operations
+        final Double salaryCost = employees.stream()
+                .map(employee -> employee.getSalary())
+                .reduce(0.0, Double::sum);
+        System.out.println(salaryCost);
     }
 
 }
