@@ -1,4 +1,4 @@
-package com.mdsdev.streamapi;
+package br.com.mdsdev.streamapi;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

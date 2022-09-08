@@ -1,4 +1,4 @@
-package com.mdsdev.streamapi;
+package br.com.mdsdev.streamapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
