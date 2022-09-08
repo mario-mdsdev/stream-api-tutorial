@@ -10,9 +10,9 @@
     </parent>
     <groupId>com.mdsdev</groupId>
     <artifactId>stream-api-tutorial</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>stream-api-tutorial</name>
-    <description>stream-api-tutorial</description>
+    <description>Testing some Stream API calls</description>
     <properties>
         <java.version>17</java.version>
     </properties>
